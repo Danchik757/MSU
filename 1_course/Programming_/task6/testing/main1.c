@@ -20,12 +20,78 @@ const r_type eps = 0.001;
 const r_type eps1 = 0.0001;
 const r_type eps2 = 0.0001;
 
-//fnction f3
-r_type f4(r_type x)
+// consts for number of iterations
+const double st1r = 0;
+const double st2r = 0;
+const double st3r = 0;
+
+const double st1i = 0;
+const double st2i = 0;
+const double st3i = 0;
+
+
+
+// function f1
+r_type fun1(r_type x)
+{
+    return (1 + 4/(pow(x, 2) + 1));
+}
+
+//function f2
+r_type fun2(r_type x)
+{
+    return (pow(x, 3));
+}
+//function f3
+r_type fun3(r_type x)
 {
     return (pow(2, -1*x));
 }
+/*
+//function f4 - const
+r_type f4 (r_type x)
+{
+    return 0;
+}
 
+//function f5 - sinx
+r_type f5(r_type x)
+{
+    return sinf(x);
+}
+//function f6
+r_type f6(r_type x)
+{
+    return (pow(x, 3));
+}
+*/
+
+extern float _f1(float x);
+extern float _f2(float x);
+extern float _f3(float x);
+
+// function f1
+r_type f1(r_type x)
+{
+    return _f1(x);
+
+    return 0;
+}
+//function f2
+r_type f2(r_type x)
+{
+    return _f2(x);
+
+    return 0;
+}
+
+//function f3
+r_type f3(r_type x)
+{
+    return _f3(x);
+
+    return 0;
+}
 
 r_type root (r_type (*f)(r_type), r_type (*g)(r_type), r_type a, r_type b, r_type eps)
 {
@@ -44,7 +110,6 @@ r_type root (r_type (*f)(r_type), r_type (*g)(r_type), r_type a, r_type b, r_typ
     return root(f, g, c, b, eps);
 }   
  
-
 r_type integral(r_type (*f)(r_type), r_type a, r_type b, r_type eps)
 {
     r_type int_left = 0;
@@ -63,7 +128,7 @@ r_type integral(r_type (*f)(r_type), r_type a, r_type b, r_type eps)
     }
     return (int_left+int_right)/2;
 }
-/*
+
 r_type square(r_type (*f)(r_type), r_type (*g)(r_type), r_type (*w)(r_type), r_type a, r_type b)
 {
     r_type root_1 = root(f, g, a, b, eps1);
@@ -78,7 +143,6 @@ r_type square(r_type (*f)(r_type), r_type (*g)(r_type), r_type (*w)(r_type), r_t
     return (s_1 + s_2);
 
 }
-*/
 int test(r_type a, r_type b, r_type eps)
 {
 
@@ -88,23 +152,25 @@ int test(r_type a, r_type b, r_type eps)
 int main (void)
 {
     printf("choose scenario and type number:\n1 - count integral\n2 - test root\n3 - test integral\n");
-    int h = 1;
+    int h = 0;
+    scanf("%d",&h);
     if (h == 1)
     {
         
-        //printf("Size of square: %f\n", square(f1, f2, f3, -2, 2));
-        printf("%f\n", integral(f4, 0, 10, 0.0001));
+        printf("Size of square: %f\n", square(f1, f2, f3, -2, 2));
     }
     /*
     if (h == 2)
     {   
-        1 - f1{1 + 4/(x^2 + 1)}
-        2 - f{x^3}
-        3 - f3{2^-x}
-        4 - f4{const}
-        5 - f5{sinx}
+        
+        //1 - f1{1 + 4/(x^2 + 1)}
+        //2 - f{x^3}
+        //3 - f3{2^-x}
+        //4 - f4{const}
+        //5 - f5{sinx}
+        
         //choose functions, chooose interval, choose eps
-        //r_type sd = root(f5, f4, 2, 4, 0.001);
+        r_type sd = root(f1, f2, 2, 4, 0.000001);
         printf("Testing function root\n");
         //write right answer, choose eps
         if (test(sd, 3.1415, 0.001 ) == 1 )
@@ -116,16 +182,16 @@ int main (void)
     if (h == 3)
     {
          //choose function, chooose interval, choose eps
-        //r_type sd = integral(f5, 0, 3.14159265, 0.001);
+        r_type sd = integral(f1, 0, 2, 0.001);
         printf("Testing function integral\n");
         
-        if (test(sd, 2, 0.001 ) == 1 )
+        if (test(sd, 4, 0.001 ) == 1 )
         {printf(" - True (Answer %f)\n", sd );}
         else
         {printf(" - False (Answer %f)\n", sd);};
 
+    */
     }
     //printf("%f", integral(f6, 0, 3, 0.001));
-    */
     return 0;
 }

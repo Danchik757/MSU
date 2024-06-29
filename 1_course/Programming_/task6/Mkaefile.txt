@@ -1,0 +1,2 @@
+hello: task6_1.c task6_step1.c
+	gcc -o hello task6_1.c task6_step1.c
